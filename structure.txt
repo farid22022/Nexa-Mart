@@ -1,0 +1,172 @@
+src/
+├── app/
+│
+├── about/
+├── services/
+├── industries/
+├── global-network/
+├── tracking-center/
+├── warehousing/
+├── transportation/
+├── air-freight/
+├── ocean-freight/
+├── rail-freight/
+├── road-freight/
+├── customs-clearance/
+├── supply-chain-solutions/
+├── ecommerce-fulfillment/
+├── sustainability/
+├── technology-innovation/
+├── digital-logistics-platform/
+├── investor-relations/
+├── careers/
+├── news-media/
+├── case-studies/
+├── contact/
+├── support-center/
+│
+├── customer-portal/
+│   ├── dashboard/
+│   ├── shipments/
+│   ├── live-tracking/
+│   ├── documents/
+│   ├── invoices/
+│   ├── payments/
+│   ├── support-tickets/
+│   ├── saved-routes/
+│   ├── notifications/
+│   ├── analytics/
+│   ├── settings/
+│   └── layout.tsx
+│
+├── logistics-control-center/
+│   ├── fleet-monitoring/
+│   ├── shipment-monitoring/
+│   ├── route-optimization/
+│   ├── ai-recommendations/
+│   ├── carbon-tracking/
+│   ├── revenue-analytics/
+│   └── page.tsx
+│
+├── tms/
+│   ├── vehicles/
+│   ├── drivers/
+│   ├── dispatch/
+│   ├── maintenance/
+│   ├── fuel-monitoring/
+│   ├── route-planning/
+│   └── page.tsx
+│
+├── warehouse-management/
+│   ├── warehouse-finder/
+│   ├── inventory/
+│   ├── booking/
+│   ├── analytics/
+│   ├── capacity/
+│   └── page.tsx
+│
+├── ai-logistics/
+│   ├── route-planning/
+│   ├── forecasting/
+│   ├── eta-prediction/
+│   ├── inventory-prediction/
+│   ├── risk-detection/
+│   └── page.tsx
+│
+├── media-center/
+│   ├── press-releases/
+│   ├── events/
+│   ├── videos/
+│   ├── downloads/
+│   └── page.tsx
+│
+├── investor-relations/
+│   ├── financial-reports/
+│   ├── annual-reports/
+│   ├── presentations/
+│   ├── governance/
+│   ├── esg-reports/
+│   └── page.tsx
+│
+└── api/
+
+components/
+│
+├── navigation/
+│   ├── mega-menu.tsx
+│   ├── smart-search.tsx
+│   ├── language-switcher.tsx
+│   ├── region-selector.tsx
+│   └── notifications-center.tsx
+│
+├── tracking/
+│   ├── live-map.tsx
+│   ├── route-visualizer.tsx
+│   ├── eta-card.tsx
+│   ├── shipment-timeline.tsx
+│   ├── geofence-monitor.tsx
+│   └── asset-tracker.tsx
+│
+├── global-network/
+│   ├── world-map.tsx
+│   ├── logistics-flow.tsx
+│   ├── office-marker.tsx
+│   ├── route-animation.tsx
+│   └── trade-route.tsx
+│
+├── warehouse/
+│   ├── warehouse-finder.tsx
+│   ├── inventory-dashboard.tsx
+│   ├── storage-calculator.tsx
+│   ├── capacity-monitor.tsx
+│   └── booking-system.tsx
+│
+├── transportation/
+│   ├── fleet-dashboard.tsx
+│   ├── vehicle-card.tsx
+│   ├── dispatch-board.tsx
+│   ├── driver-management.tsx
+│   └── route-planner.tsx
+│
+├── ai/
+│   ├── ai-route-planner.tsx
+│   ├── ai-forecasting.tsx
+│   ├── ai-risk-detection.tsx
+│   ├── ai-eta-prediction.tsx
+│   └── ai-inventory.tsx
+│
+├── dashboards/
+│   ├── kpi-dashboard.tsx
+│   ├── revenue-chart.tsx
+│   ├── carbon-dashboard.tsx
+│   ├── shipment-dashboard.tsx
+│   └── analytics-dashboard.tsx
+│
+├── ecommerce/
+│   ├── order-journey.tsx
+│   ├── pick-pack-flow.tsx
+│   ├── returns-center.tsx
+│   └── marketplace-integration.tsx
+│
+├── support/
+│   ├── ai-chatbot.tsx
+│   ├── ticket-system.tsx
+│   ├── knowledge-base.tsx
+│   ├── faq-search.tsx
+│   └── call-scheduler.tsx
+│
+├── careers/
+│   ├── jobs-search.tsx
+│   ├── employee-stories.tsx
+│   ├── benefits.tsx
+│   └── hiring-process.tsx
+│
+└── 3d/
+    ├── LogisticsWorld.tsx
+    ├── WorldMapScene.tsx
+    ├── SmartWarehouseScene.tsx
+    ├── PortScene.tsx
+    ├── AirportScene.tsx
+    ├── RailScene.tsx
+    ├── FleetScene.tsx
+    └── ContainerScene.tsx
