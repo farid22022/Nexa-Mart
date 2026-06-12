@@ -27,14 +27,36 @@ import { categories } from "@/lib/data";
 
 const navLinks = [
   { label: "Products", href: "/products" },
-  { label: "Deals", href: "/deals" },
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
-  { label: "Sellers", href: "/sellers" },
-  { label: "Rewards", href: "/rewards" },
-  { label: "Tracking", href: "/tracking" },
-  { label: "Vendor", href: "/dashboard/vendor" },
-  { label: "Services", href: "/services" }
+
+  // Enterprise Pages
+  { label: "Services", href: "/services" },
+  { label: "Industries", href: "/industries" },
+  { label: "Global Network", href: "/global-network" },
+  { label: "Tracking Center", href: "/tracking-center" },
+
+  // Logistics Services
+  { label: "Warehousing", href: "/warehousing" },
+  { label: "Transportation", href: "/transportation" },
+  { label: "Air Freight", href: "/air-freight" },
+  { label: "Ocean Freight", href: "/ocean-freight" },
+  { label: "Rail Freight", href: "/rail-freight" },
+  { label: "Road Freight", href: "/road-freight" },
+  { label: "Customs", href: "/customs-clearance" },
+
+  // Solutions
+  { label: "Supply Chain", href: "/supply-chain-solutions" },
+  { label: "E-Fulfillment", href: "/ecommerce-fulfillment" },
+  { label: "Technology", href: "/technology-innovation" },
+  { label: "Platform", href: "/digital-logistics-platform" },
+
+  // Company
+  { label: "Sustainability", href: "/sustainability" },
+  { label: "Careers", href: "/careers" },
+  { label: "News", href: "/news-media" },
+  { label: "Investors", href: "/investor-relations" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Support", href: "/support-center" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function SiteHeader() {
