@@ -1,90 +1,68 @@
-import { Train, Route, Package, BarChart3 } from "lucide-react";
-import dynamic from "next/dynamic";
+import { Ship, Container, Anchor, Globe } from "lucide-react";
 
-const RailScene = dynamic(
-  () => import("@/components/3d/RailScene").then((m) => m.RailScene),
-  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
-);
-
-const features = [
+const services = [
   {
-    title: "Intermodal Freight",
-    icon: Train,
+    title: "FCL Shipping",
+    description: "Dedicated full-container shipping solutions.",
+    icon: Container,
   },
   {
-    title: "Cross-Border Rail",
-    icon: Route,
+    title: "LCL Shipping",
+    description: "Cost-efficient shared container transportation.",
+    icon: Ship,
   },
   {
-    title: "Bulk Cargo",
-    icon: Package,
+    title: "Reefer Containers",
+    description: "Temperature-controlled ocean freight services.",
+    icon: Anchor,
   },
   {
-    title: "Route Analytics",
-    icon: BarChart3,
+    title: "Project Cargo",
+    description: "Heavy-lift and oversized cargo management.",
+    icon: Globe,
   },
 ];
 
-export default function RailFreightPage() {
+export default function OceanFreightPage() {
   return (
     <main className="min-h-screen">
       <section className="container mx-auto px-6 py-24">
-
         <span className="text-red-600 font-semibold">
-          RAIL LOGISTICS NETWORK
+          GLOBAL OCEAN NETWORK
         </span>
 
         <h1 className="text-5xl font-bold mt-4 mb-6">
-          Rail Freight Services
+          Ocean Freight Solutions
         </h1>
 
         <p className="max-w-3xl text-muted-foreground mb-12">
-          Sustainable, efficient, and scalable rail transportation
-          across domestic and international corridors.
+          Reliable international container shipping connecting major ports and
+          trade routes worldwide.
         </p>
 
-        <div className="h-[500px] border rounded-xl overflow-hidden mb-16">
-          <RailScene />
-        </div>
+        <div className="h-[500px] border rounded-xl overflow-hidden mb-16 bg-muted/20" />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="border rounded-xl p-6"
-            >
-              <feature.icon className="w-10 h-10 mb-4 text-red-600" />
+          {services.map((service) => (
+            <div key={service.title} className="border rounded-xl p-6">
+              <service.icon className="w-10 h-10 mb-4 text-red-600" />
 
-              <h3 className="font-semibold text-xl">
-                {feature.title}
-              </h3>
+              <h3 className="font-semibold text-xl mb-3">{service.title}</h3>
+
+              <p className="text-muted-foreground">{service.description}</p>
             </div>
           ))}
         </div>
 
-        <div className="grid md:grid-cols-4 gap-6 mt-16">
-          <StatCard title="Rail Routes" value="850+" />
-          <StatCard title="Countries" value="42" />
-          <StatCard title="Terminals" value="130+" />
-          <StatCard title="Efficiency" value="96%" />
-        </div>
+        <div className="mt-16 border rounded-xl p-8">
+          <h2 className="text-2xl font-bold mb-4">Port-to-Port Tracking</h2>
 
+          <p className="text-muted-foreground">
+            Monitor vessel location, ETA predictions, customs status, and
+            container milestones in real time.
+          </p>
+        </div>
       </section>
     </main>
-  );
-}
-
-function StatCard({
-  title,
-  value,
-}: {
-  title: string;
-  value: string;
-}) {
-  return (
-    <div className="border rounded-xl p-6 text-center">
-      <div className="text-3xl font-bold">{value}</div>
-      <div className="text-muted-foreground mt-2">{title}</div>
-    </div>
   );
 }

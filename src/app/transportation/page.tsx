@@ -1,22 +1,7 @@
-import {
-  Truck,
-  Route,
-  Radio,
-  Fuel,
-  Wrench,
-  UserCog,
-} from "lucide-react";
+import { Truck, Route, Radio, Fuel, Wrench, UserCog } from "lucide-react";
 import { FeatureCard } from "@/components/enterprise/feature-card";
-import dynamic from "next/dynamic";
 
-const ContainerScene = dynamic(
-  () => import("@/components/3d/ContainerScene").then((m) => m.ContainerScene),
-  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
-);
-
-
-export default function TransportationPage() {
-  const transportationFeatures = [
+const transportationFeatures = [
   {
     title: "Vehicle Management",
     description:
@@ -54,21 +39,18 @@ export default function TransportationPage() {
     icon: UserCog,
   },
 ];
+
+export default function TransportationPage() {
   return (
     <main className="min-h-screen">
       <section className="container mx-auto px-6 py-24">
-
-        <h1 className="text-5xl font-bold mb-6">
-          Transportation Management
-        </h1>
+        <h1 className="text-5xl font-bold mb-6">Transportation Management</h1>
 
         <p className="mb-12 text-muted-foreground max-w-3xl">
           Unified control of road, rail, air, and ocean logistics.
         </p>
 
-        <div className="h-auto border rounded-xl overflow-hidden">
-          <ContainerScene />
-        </div>
+        <div className="h-[500px] border rounded-xl overflow-hidden bg-muted/20" />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {transportationFeatures.map((feature) => (
@@ -80,7 +62,6 @@ export default function TransportationPage() {
             />
           ))}
         </div>
-
       </section>
     </main>
   );
