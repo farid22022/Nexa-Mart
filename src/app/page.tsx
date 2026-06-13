@@ -16,8 +16,6 @@ import {
   Globe,
   Flame,
 } from "lucide-react";
-import dynamic from "next/dynamic";
-
 import { MotionReveal } from "@/components/motion-reveal";
 import { ProductCard } from "@/components/product-card";
 import { Badge } from "@/components/ui/badge";
@@ -26,11 +24,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { categories, products, reviews } from "@/lib/data";
-
-const Hero3DScene = dynamic(
-  () => import("@/components/3d/Hero3DScene").then((m) => m.Hero3DScene),
-  { ssr: false }
-);
 
 export default function Home() {
   const featuredProducts = products.slice(0, 4);
@@ -71,7 +64,7 @@ export default function Home() {
     <div>
       {/* Enhanced Hero Section */}
       <section className="relative min-h-[750px] overflow-hidden">
-        <Hero3DScene />
+        <div className="absolute inset-0 bg-muted/20" />
         <Image
           src="/team.png"
           alt="Premium e-commerce shopping experience"
