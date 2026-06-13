@@ -1,11 +1,4 @@
 import { Plane, Globe, Shield, Thermometer } from "lucide-react";
-import dynamic from "next/dynamic";
-
-const AirportScene = dynamic(
-  () => import("@/components/3d/AirportScene").then((m) => m.AirportScene),
-  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
-);
-
 const services = [
   {
     title: "Express Cargo",
@@ -51,9 +44,7 @@ export default function AirFreightPage() {
           connectivity.
         </p>
 
-        <div className="h-[500px] border rounded-xl overflow-hidden mb-16">
-          <AirportScene />
-        </div>
+        <div className="h-[500px] border rounded-xl overflow-hidden mb-16 bg-muted/20" />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
