@@ -4,6 +4,12 @@ import {
   Eye,
   UserCircle,
 } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const FleetScene = dynamic(
+  () => import("@/components/3d/FleetScene").then((m) => m.FleetScene),
+  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
+);
 
 const services = [
   {
@@ -50,8 +56,8 @@ export default function RoadFreightPage() {
           route optimization, and last-mile delivery excellence.
         </p>
 
-        <div className="h-[500px] border rounded-xl flex items-center justify-center mb-16">
-          3D Highway & Fleet Operations Scene
+        <div className="h-[500px] border rounded-xl overflow-hidden mb-16">
+          <FleetScene />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

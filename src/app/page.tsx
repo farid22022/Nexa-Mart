@@ -16,7 +16,7 @@ import {
   Globe,
   Flame,
 } from "lucide-react";
-
+import dynamic from "next/dynamic";
 
 import { MotionReveal } from "@/components/motion-reveal";
 import { ProductCard } from "@/components/product-card";
@@ -26,6 +26,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { categories, products, reviews } from "@/lib/data";
+
+const Hero3DScene = dynamic(
+  () => import("@/components/3d/Hero3DScene").then((m) => m.Hero3DScene),
+  { ssr: false }
+);
 
 export default function Home() {
   const featuredProducts = products.slice(0, 4);
@@ -66,18 +71,19 @@ export default function Home() {
     <div>
       {/* Enhanced Hero Section */}
       <section className="relative min-h-[750px] overflow-hidden">
+        <Hero3DScene />
         <Image
           src="/team.png"
           alt="Premium e-commerce shopping experience"
           fill
-          className="object-cover"
+          className="object-cover opacity-20 dark:opacity-10 mix-blend-overlay"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/86 to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/10 pointer-events-none" />
         
         {/* Animated background elements */}
-        <div className="absolute top-20 right-20 h-72 w-72 rounded-full bg-blue-500 blur-3xl opacity-10 animate-float" />
-        <div className="absolute bottom-20 left-20 h-96 w-96 rounded-full bg-purple-500 blur-3xl opacity-10 animate-float" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-20 right-20 h-72 w-72 rounded-full bg-blue-500 blur-3xl opacity-10 animate-float pointer-events-none" />
+        <div className="absolute bottom-20 left-20 h-96 w-96 rounded-full bg-purple-500 blur-3xl opacity-10 animate-float pointer-events-none" style={{ animationDelay: "1s" }} />
         
         <div className="container-page relative flex min-h-[750px] items-center py-16">
           <MotionReveal className="max-w-2xl">

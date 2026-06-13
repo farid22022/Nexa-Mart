@@ -1,5 +1,11 @@
 import { FeatureCard } from "@/components/enterprise/feature-card";
 import { BarChart3, Boxes, Calculator, CalendarPlus, Database, Warehouse } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const SmartWarehouseScene = dynamic(
+  () => import("@/components/3d/SmartWarehouseScene").then((m) => m.SmartWarehouseScene),
+  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
+);
 
 
 import { WarehouseStat } from "@/components/enterprise/warehouse-stat";
@@ -62,8 +68,8 @@ export default function WarehousingPage() {
           <WarehouseStat title="Inventory Accuracy" value="99.8%" />
         </div>
 
-        <div className="h-[500px] border rounded-xl flex items-center justify-center">
-          3D Smart Warehouse Scene
+        <div className="h-[500px] border rounded-xl overflow-hidden">
+          <SmartWarehouseScene />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">

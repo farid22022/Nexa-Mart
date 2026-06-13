@@ -1,3 +1,10 @@
+import dynamic from "next/dynamic";
+
+const LogisticsWorld = dynamic(
+  () => import("@/components/3d/LogisticsWorld").then((m) => m.LogisticsWorld),
+  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-2xl" /> }
+);
+
 export default function GlobalNetworkPage() {
   const locations = [
     "Singapore Hub",
@@ -22,16 +29,8 @@ export default function GlobalNetworkPage() {
           distribution centers powering global trade.
         </p>
 
-        <div className="h-[600px] rounded-2xl border flex items-center justify-center mb-12">
-          <div className="text-center">
-            <h3 className="text-2xl font-semibold mb-4">
-              Interactive World Logistics Map
-            </h3>
-
-            <p className="text-muted-foreground">
-              Three.js logistics globe will be integrated here.
-            </p>
-          </div>
+        <div className="h-[600px] rounded-2xl border overflow-hidden mb-12">
+          <LogisticsWorld />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

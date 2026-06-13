@@ -6,8 +6,13 @@ import {
   Wrench,
   UserCog,
 } from "lucide-react";
-
 import { FeatureCard } from "@/components/enterprise/feature-card";
+import dynamic from "next/dynamic";
+
+const ContainerScene = dynamic(
+  () => import("@/components/3d/ContainerScene").then((m) => m.ContainerScene),
+  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
+);
 
 
 export default function TransportationPage() {
@@ -61,8 +66,8 @@ export default function TransportationPage() {
           Unified control of road, rail, air, and ocean logistics.
         </p>
 
-        <div className="h-[550px] rounded-xl border flex items-center justify-center">
-          Fleet Operations 3D Scene
+        <div className="h-auto border rounded-xl overflow-hidden">
+          <ContainerScene />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">

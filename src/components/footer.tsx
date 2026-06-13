@@ -7,15 +7,30 @@ import { Input } from "@/components/ui/input";
 const footerLinks = [
   {
     title: "Shop",
-    links: ["Featured", "Best sellers", "New arrivals", "Flash sales"],
+    links: [
+      { label: "Featured", href: "/products?filter=featured" },
+      { label: "Best sellers", href: "/products?filter=best-sellers" },
+      { label: "New arrivals", href: "/products?filter=new-arrivals" },
+      { label: "Flash sales", href: "/products?filter=flash-sales" },
+    ],
   },
   {
     title: "Accounts",
-    links: ["Dashboard", "Orders", "Wishlist", "Rewards"],
+    links: [
+      { label: "Dashboard", href: "/dashboard/customer" },
+      { label: "Orders", href: "/dashboard/customer/orders" },
+      { label: "Wishlist", href: "/dashboard/customer/wishlist" },
+      { label: "Rewards", href: "/rewards" },
+    ],
   },
   {
     title: "Business",
-    links: ["Vendor panel", "Admin panel", "Payments", "Reports"],
+    links: [
+      { label: "Vendor panel", href: "/dashboard/vendor" },
+      { label: "Admin panel", href: "/dashboard/admin" },
+      { label: "Payments", href: "/payments" },
+      { label: "Reports", href: "/dashboard/admin/reports" },
+    ],
   },
 ];
 
@@ -47,8 +62,8 @@ export function Footer() {
               <h3 className="font-medium">{group.title}</h3>
               <div className="mt-3 grid gap-2 text-sm text-muted-foreground">
                 {group.links.map((link) => (
-                  <Link key={link} href="/products" className="hover:text-foreground">
-                    {link}
+                  <Link key={link.label} href={link.href} className="hover:text-foreground">
+                    {link.label}
                   </Link>
                 ))}
               </div>

@@ -3,6 +3,12 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
+
+const LogisticsWorld = dynamic(
+  () => import("@/components/3d/LogisticsWorld").then((m) => m.LogisticsWorld),
+  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
+);
 
 export default function TrackingCenterPage() {
   const [trackingId, setTrackingId] = useState("");
@@ -57,8 +63,8 @@ export default function TrackingCenterPage() {
           </div>
         </div>
 
-        <div className="h-[500px] mt-12 border rounded-xl flex items-center justify-center">
-          Live Tracking Map
+        <div className="h-[500px] mt-12 border rounded-xl overflow-hidden">
+          <LogisticsWorld />
         </div>
       </section>
     </main>

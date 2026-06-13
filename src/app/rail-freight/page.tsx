@@ -1,4 +1,10 @@
 import { Train, Route, Package, BarChart3 } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const RailScene = dynamic(
+  () => import("@/components/3d/RailScene").then((m) => m.RailScene),
+  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
+);
 
 const features = [
   {
@@ -37,8 +43,8 @@ export default function RailFreightPage() {
           across domestic and international corridors.
         </p>
 
-        <div className="h-[500px] border rounded-xl flex items-center justify-center mb-16">
-          3D Rail Logistics Network
+        <div className="h-[500px] border rounded-xl overflow-hidden mb-16">
+          <RailScene />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

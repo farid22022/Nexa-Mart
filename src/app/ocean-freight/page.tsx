@@ -1,4 +1,10 @@
 import { Ship, Container, Anchor, Globe } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const PortScene = dynamic(
+  () => import("@/components/3d/PortScene").then((m) => m.PortScene),
+  { ssr: false, loading: () => <div className="h-full w-full bg-muted/20 rounded-xl" /> }
+);
 
 const services = [
   {
@@ -41,8 +47,8 @@ export default function OceanFreightPage() {
           and trade routes worldwide.
         </p>
 
-        <div className="h-[500px] border rounded-xl flex items-center justify-center mb-16">
-          3D Smart Port & Container Terminal
+        <div className="h-[500px] border rounded-xl overflow-hidden mb-16">
+          <PortScene />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
