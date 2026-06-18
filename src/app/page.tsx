@@ -15,6 +15,10 @@ import {
   Heart,
   Globe,
   Flame,
+  ShoppingBag,
+  Gift,
+  CreditCard,
+  Lock,
 } from "lucide-react";
 import { MotionReveal } from "@/components/motion-reveal";
 import { ProductCard } from "@/components/product-card";
@@ -60,10 +64,100 @@ export default function Home() {
     },
   ];
 
+  const marqueeItems = [
+    { icon: Truck, text: "Free express delivery on orders over $50" },
+    { icon: BadgePercent, text: "Up to 70% off — flash sale ends soon" },
+    { icon: ShieldCheck, text: "100% secure checkout & buyer protection" },
+    { icon: Sparkles, text: "New arrivals dropping every week" },
+    { icon: Award, text: "Trusted by 100,000+ happy shoppers" },
+  ];
+
   return (
     <div>
+      {/* Scoped styles for animated banner + 3D effects */}
+      <style>{`
+        @keyframes marquee-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .animate-marquee-scroll {
+          animation: marquee-scroll 24s linear infinite;
+        }
+        .animate-marquee-scroll:hover {
+          animation-play-state: paused;
+        }
+
+        .cube-scene {
+          perspective: 1300px;
+        }
+        .cube3d {
+          width: 180px;
+          height: 180px;
+          position: relative;
+          transform-style: preserve-3d;
+          animation: cube-spin 16s linear infinite;
+        }
+        .cube3d-face {
+          position: absolute;
+          inset: 0;
+          width: 180px;
+          height: 180px;
+          border-radius: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+        }
+        .cube3d-front  { transform: translateZ(90px); background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .cube3d-back   { transform: rotateY(180deg) translateZ(90px); background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+        .cube3d-right  { transform: rotateY(90deg) translateZ(90px); background: linear-gradient(135deg, #3b82f6, #6366f1); }
+        .cube3d-left   { transform: rotateY(-90deg) translateZ(90px); background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+        .cube3d-top    { transform: rotateX(90deg) translateZ(90px); background: linear-gradient(135deg, #f59e0b, #ec4899); }
+        .cube3d-bottom { transform: rotateX(-90deg) translateZ(90px); background: linear-gradient(135deg, #10b981, #06b6d4); }
+        @keyframes cube-spin {
+          from { transform: rotateX(0deg) rotateY(0deg); }
+          to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        @keyframes cube-ring-pulse {
+          0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+          50% { transform: translateX(-50%) scale(1.15); opacity: 0.15; }
+        }
+        .cube-ring {
+          animation: cube-ring-pulse 4s ease-in-out infinite;
+        }
+
+        .tilt-wrap { perspective: 1100px; }
+        .tilt-card {
+          transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+          transform-style: preserve-3d;
+          will-change: transform;
+        }
+        .tilt-card:hover {
+          transform: rotateX(8deg) rotateY(-8deg) translateY(-6px) scale(1.02);
+        }
+      `}</style>
+      {/* Animated Announcement Banner */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-primary via-blue-600 to-purple-600 py-2.5 text-white">
+        <div className="flex w-max animate-marquee-scroll whitespace-nowrap">
+          {[0, 1].map((dup) => (
+            <div key={dup} className="flex items-center gap-10 pr-10">
+              {marqueeItems.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <span key={i} className="flex items-center gap-2 text-sm font-medium">
+                    <Icon className="size-4" />
+                    {item.text}
+                  </span>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Enhanced Hero Section */}
-      <section className="relative min-h-[750px] overflow-hidden">
+      <section className="relative min-h-[880px] overflow-hidden lg:min-h-[960px]">
         <div className="absolute inset-0 bg-muted/20" />
         <Image
           src="/team.png"
@@ -73,38 +167,51 @@ export default function Home() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/10 pointer-events-none" />
-        
+
         {/* Animated background elements */}
         <div className="absolute top-20 right-20 h-72 w-72 rounded-full bg-blue-500 blur-3xl opacity-10 animate-float pointer-events-none" />
         <div className="absolute bottom-20 left-20 h-96 w-96 rounded-full bg-purple-500 blur-3xl opacity-10 animate-float pointer-events-none" style={{ animationDelay: "1s" }} />
-        
-        <div className="container-page relative flex min-h-[750px] items-center py-16">
+
+        {/* Floating 3D cube */}
+        <div className="cube-scene pointer-events-none absolute right-[8%] top-1/2 hidden -translate-y-1/2 xl:block">
+          <div className="cube3d">
+            <div className="cube3d-face cube3d-front"><ShoppingBag className="size-12" /></div>
+            <div className="cube3d-face cube3d-back"><Gift className="size-12" /></div>
+            <div className="cube3d-face cube3d-right"><CreditCard className="size-12" /></div>
+            <div className="cube3d-face cube3d-left"><Lock className="size-12" /></div>
+            <div className="cube3d-face cube3d-top"><Truck className="size-12" /></div>
+            <div className="cube3d-face cube3d-bottom"><Sparkles className="size-12" /></div>
+          </div>
+          <div className="cube-ring absolute left-1/2 top-[210px] h-6 w-44 -translate-x-1/2 rounded-full bg-primary/30 blur-xl" />
+        </div>
+
+        <div className="container-page relative flex min-h-[880px] items-center py-20 lg:min-h-[960px]">
           <MotionReveal className="max-w-2xl">
             <Image
               src="/logo.png"
               alt="Nexa Mart Logo"
-              width={120}
-              height={120}
+              width={150}
+              height={150}
               className="mb-6 drop-shadow-lg"
             />
             <Badge className="mb-5 animate-pulse gap-2">
               <Sparkles className="size-4" />
               <span>Summer launch collection</span>
             </Badge>
-            <h1 className="animate-fade-in-up text-5xl font-bold tracking-tighter sm:text-6xl lg:text-8xl leading-tight">
+            <h1 className="animate-fade-in-up text-6xl font-bold tracking-tighter sm:text-7xl lg:text-8xl xl:text-9xl leading-[1.05]">
               Nexa Mart <span className="text-primary"></span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-              Discover millions of products from verified vendors. Enjoy fast delivery, 
+            <p className="mt-7 max-w-xl text-xl leading-8 text-muted-foreground animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+              Discover millions of products from verified vendors. Enjoy fast delivery,
               secure payments, and premium quality—all in one modern marketplace.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <Button asChild size="lg" className="group">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              <Button asChild size="lg" className="group h-14 px-8 text-base">
                 <Link href="/products">
                   Shop collection <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
+              <Button asChild variant="outline" size="lg" className="h-14 px-8 text-base">
                 <Link href="/dashboard/admin">View admin demo</Link>
               </Button>
             </div>
@@ -113,14 +220,14 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="bg-gradient-to-r from-primary/10 via-blue-500/10 to-purple-500/10 py-16 border-y">
+      <section className="bg-gradient-to-r from-primary/10 via-blue-500/10 to-purple-500/10 py-20 border-y">
         <div className="container-page">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat, index) => (
               <MotionReveal key={stat.label} delay={index * 0.1}>
-                <div className="text-center hover-lift rounded-lg p-6 bg-white/50 backdrop-blur-sm border border-white/20 hover:bg-white/70 transition-all">
-                  <p className="text-4xl lg:text-5xl font-bold text-primary mb-2">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
+                <div className="text-center hover-lift rounded-xl p-8 bg-white/50 backdrop-blur-sm border border-white/20 hover:bg-white/70 transition-all">
+                  <p className="text-5xl lg:text-6xl font-bold text-primary mb-2">{stat.value}</p>
+                  <p className="text-base text-muted-foreground font-medium">{stat.label}</p>
                 </div>
               </MotionReveal>
             ))}
@@ -153,11 +260,11 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="container-page py-16">
+      <section className="container-page py-20">
         <MotionReveal>
-          <div className="text-center mb-12">
+          <div className="text-center mb-14">
             <p className="text-sm font-medium text-primary">OUR ADVANTAGES</p>
-            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mt-2">
+            <h2 className="text-5xl lg:text-6xl font-bold tracking-tight mt-2">
               Why Choose Nexa Mart?
             </h2>
           </div>
@@ -167,15 +274,17 @@ export default function Home() {
             const Icon = item.icon;
             return (
               <MotionReveal key={item.title} delay={index * 0.1}>
-                <Card className="hover-lift border-0 bg-gradient-to-br from-card via-card to-primary/5 hover:shadow-lg transition-all">
-                  <CardContent className="p-6">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary mb-4">
-                      <Icon className="size-6" />
-                    </div>
-                    <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.description}</p>
-                  </CardContent>
-                </Card>
+                <div className="tilt-wrap">
+                  <Card className="tilt-card hover-lift border-0 bg-gradient-to-br from-card via-card to-primary/5 hover:shadow-2xl transition-shadow">
+                    <CardContent className="p-7">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/15 text-primary mb-4">
+                        <Icon className="size-7" />
+                      </div>
+                      <h3 className="font-semibold text-xl mb-2">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                    </CardContent>
+                  </Card>
+                </div>
               </MotionReveal>
             );
           })}
