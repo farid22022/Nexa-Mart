@@ -15,10 +15,6 @@ import {
   Heart,
   Globe,
   Flame,
-  ShoppingBag,
-  Gift,
-  CreditCard,
-  Lock,
 } from "lucide-react";
 import { MotionReveal } from "@/components/motion-reveal";
 import { ProductCard } from "@/components/product-card";
@@ -87,45 +83,63 @@ export default function Home() {
           animation-play-state: paused;
         }
 
-        .cube-scene {
-          perspective: 1300px;
+        /* ── Market widget ── */
+        @keyframes chart-draw {
+          from { stroke-dashoffset: 600; }
+          to   { stroke-dashoffset: 0; }
         }
-        .cube3d {
-          width: 180px;
-          height: 180px;
-          position: relative;
-          transform-style: preserve-3d;
-          animation: cube-spin 16s linear infinite;
+        @keyframes bar-grow {
+          from { transform: scaleX(0); }
+          to   { transform: scaleX(1); }
         }
-        .cube3d-face {
-          position: absolute;
-          inset: 0;
-          width: 180px;
-          height: 180px;
-          border-radius: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+        @keyframes tick-up {
+          0%   { transform: translateY(0);    opacity: 1; }
+          40%  { transform: translateY(-8px); opacity: 0; }
+          41%  { transform: translateY(8px);  opacity: 0; }
+          100% { transform: translateY(0);    opacity: 1; }
         }
-        .cube3d-front  { transform: translateZ(90px); background: linear-gradient(135deg, #6366f1, #8b5cf6); }
-        .cube3d-back   { transform: rotateY(180deg) translateZ(90px); background: linear-gradient(135deg, #8b5cf6, #ec4899); }
-        .cube3d-right  { transform: rotateY(90deg) translateZ(90px); background: linear-gradient(135deg, #3b82f6, #6366f1); }
-        .cube3d-left   { transform: rotateY(-90deg) translateZ(90px); background: linear-gradient(135deg, #06b6d4, #3b82f6); }
-        .cube3d-top    { transform: rotateX(90deg) translateZ(90px); background: linear-gradient(135deg, #f59e0b, #ec4899); }
-        .cube3d-bottom { transform: rotateX(-90deg) translateZ(90px); background: linear-gradient(135deg, #10b981, #06b6d4); }
-        @keyframes cube-spin {
-          from { transform: rotateX(0deg) rotateY(0deg); }
-          to { transform: rotateX(360deg) rotateY(360deg); }
+        @keyframes live-pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+          60%      { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
         }
-        @keyframes cube-ring-pulse {
-          0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
-          50% { transform: translateX(-50%) scale(1.15); opacity: 0.15; }
+        @keyframes market-float {
+          0%, 100% { transform: translateY(0px) rotate(-2deg); }
+          50%       { transform: translateY(-14px) rotate(2deg); }
         }
-        .cube-ring {
-          animation: cube-ring-pulse 4s ease-in-out infinite;
+        @keyframes sparkle-pop {
+          0%, 100% { opacity: 0.3; transform: scale(0.8); }
+          50%       { opacity: 1;   transform: scale(1.2); }
         }
+        .market-card {
+          animation: market-float 7s ease-in-out infinite;
+        }
+        .chart-line {
+          stroke-dasharray: 600;
+          animation: chart-draw 2.2s cubic-bezier(0.4,0,0.2,1) forwards;
+        }
+        .chart-line-2 {
+          stroke-dasharray: 600;
+          animation: chart-draw 2.8s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+        }
+        .bar-fill {
+          transform-origin: left;
+          animation: bar-grow 1.4s cubic-bezier(0.4,0,0.2,1) forwards;
+        }
+        .bar-fill-1 { animation-delay: 0.1s; }
+        .bar-fill-2 { animation-delay: 0.25s; }
+        .bar-fill-3 { animation-delay: 0.4s; }
+        .bar-fill-4 { animation-delay: 0.55s; }
+        .live-dot {
+          animation: live-pulse 1.6s ease-out infinite;
+        }
+        .price-tick {
+          animation: tick-up 3s ease-in-out infinite;
+        }
+        .price-tick-2 { animation-delay: 1s; }
+        .price-tick-3 { animation-delay: 2s; }
+        .sparkle-1 { animation: sparkle-pop 2.2s ease-in-out infinite; }
+        .sparkle-2 { animation: sparkle-pop 2.2s ease-in-out infinite 0.7s; }
+        .sparkle-3 { animation: sparkle-pop 2.2s ease-in-out infinite 1.4s; }
 
         .tilt-wrap { perspective: 1100px; }
         .tilt-card {
@@ -172,17 +186,98 @@ export default function Home() {
         <div className="absolute top-20 right-20 h-72 w-72 rounded-full bg-blue-500 blur-3xl opacity-10 animate-float pointer-events-none" />
         <div className="absolute bottom-20 left-20 h-96 w-96 rounded-full bg-purple-500 blur-3xl opacity-10 animate-float pointer-events-none" style={{ animationDelay: "1s" }} />
 
-        {/* Floating 3D cube */}
-        <div className="cube-scene pointer-events-none absolute right-[8%] top-1/2 hidden -translate-y-1/2 xl:block">
-          <div className="cube3d">
-            <div className="cube3d-face cube3d-front"><ShoppingBag className="size-12" /></div>
-            <div className="cube3d-face cube3d-back"><Gift className="size-12" /></div>
-            <div className="cube3d-face cube3d-right"><CreditCard className="size-12" /></div>
-            <div className="cube3d-face cube3d-left"><Lock className="size-12" /></div>
-            <div className="cube3d-face cube3d-top"><Truck className="size-12" /></div>
-            <div className="cube3d-face cube3d-bottom"><Sparkles className="size-12" /></div>
+        {/* Live Market Widget */}
+        <div className="market-card pointer-events-none absolute right-[5%] top-1/2 hidden -translate-y-1/2 xl:flex xl:flex-col xl:gap-3" style={{ width: 260 }}>
+          {/* Main chart card */}
+          <div className="rounded-2xl border border-white/20 bg-background/80 backdrop-blur-xl shadow-2xl p-5">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <span className="live-dot inline-block h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                <span className="text-xs font-semibold text-foreground">LIVE MARKET</span>
+              </div>
+              <span className="text-[10px] font-mono text-muted-foreground">Today</span>
+            </div>
+
+            {/* SVG Sparkline */}
+            <div className="relative mb-4 h-[80px] w-full overflow-hidden rounded-xl bg-primary/5">
+              <svg viewBox="0 0 240 80" className="w-full h-full" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                  </linearGradient>
+                  <linearGradient id="chartGrad2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path d="M0 70 Q20 60 40 50 T80 30 T120 40 T160 20 T200 28 T240 15 L240 80 L0 80 Z" fill="url(#chartGrad)" />
+                <path d="M0 75 Q30 70 60 65 T120 55 T180 45 T240 35 L240 80 L0 80 Z" fill="url(#chartGrad2)" />
+                <path
+                  className="chart-line"
+                  d="M0 70 Q20 60 40 50 T80 30 T120 40 T160 20 T200 28 T240 15"
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  className="chart-line-2"
+                  d="M0 75 Q30 70 60 65 T120 55 T180 45 T240 35"
+                  fill="none"
+                  stroke="#10b981"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeDasharray="4 3"
+                />
+                <circle cx="240" cy="15" r="4" fill="hsl(var(--primary))" opacity="0.9" />
+                <circle cx="240" cy="15" r="7" fill="hsl(var(--primary))" opacity="0.2" />
+              </svg>
+            </div>
+
+            {/* Category bars */}
+            <div className="space-y-2.5">
+              {[
+                { label: "Electronics",   pct: 82, change: "+12.4%", color: "hsl(var(--primary))", delay: "price-tick" },
+                { label: "Fashion",       pct: 67, change: "+8.1%",  color: "#10b981",             delay: "price-tick price-tick-2" },
+                { label: "Home & Living", pct: 54, change: "+5.6%",  color: "#f59e0b",             delay: "price-tick price-tick-3" },
+                { label: "Beauty",        pct: 39, change: "+3.2%",  color: "#ec4899",             delay: "" },
+              ].map((item, i) => (
+                <div key={item.label}>
+                  <div className="flex justify-between text-[10px] mb-1">
+                    <span className="font-medium text-foreground">{item.label}</span>
+                    <span className={`font-semibold ${item.delay}`} style={{ color: item.color }}>{item.change}</span>
+                  </div>
+                  <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                    <div
+                      className={`bar-fill bar-fill-${i + 1} h-full rounded-full`}
+                      style={{ width: `${item.pct}%`, background: item.color }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="cube-ring absolute left-1/2 top-[210px] h-6 w-44 -translate-x-1/2 rounded-full bg-primary/30 blur-xl" />
+
+          {/* Mini stat pills */}
+          <div className="flex gap-2">
+            <div className="flex-1 rounded-xl border border-white/20 bg-background/80 backdrop-blur-xl shadow-lg p-3 text-center">
+              <p className="text-[10px] text-muted-foreground mb-0.5">Orders Today</p>
+              <p className="text-base font-bold text-emerald-500">5,284</p>
+            </div>
+            <div className="flex-1 rounded-xl border border-white/20 bg-background/80 backdrop-blur-xl shadow-lg p-3 text-center">
+              <p className="text-[10px] text-muted-foreground mb-0.5">Avg. Value</p>
+              <p className="text-base font-bold text-primary">$67.3</p>
+            </div>
+          </div>
+
+          {/* Sparkle accent dots */}
+          <div className="absolute -top-4 -right-4 flex gap-1.5">
+            <span className="sparkle-1 inline-block h-2 w-2 rounded-full bg-primary/60" />
+            <span className="sparkle-2 inline-block h-1.5 w-1.5 rounded-full bg-emerald-400/70" />
+            <span className="sparkle-3 inline-block h-2.5 w-2.5 rounded-full bg-amber-400/60" />
+          </div>
         </div>
 
         <div className="container-page relative flex min-h-[880px] items-center py-20 lg:min-h-[960px]">
